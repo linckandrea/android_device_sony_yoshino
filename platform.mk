@@ -35,6 +35,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/perf/targetresourceconfigs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/targetresourceconfigs.xml \
     $(LOCAL_PATH)/configs/perf/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml
+
+# EAS PowerHAL configuration file
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/config/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+
+# EAS PowerHAL
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.2-service.wahoo-libperfmgr
     
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay

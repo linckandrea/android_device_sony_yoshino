@@ -73,6 +73,9 @@ BOARD_ROOT_EXTRA_FOLDERS := ocm
 # Build ext4 tools - system/vold
 TARGET_USERIMAGES_USE_EXT4 := true
 
+# Build f2fs tools - system/vold
+TARGET_USERIMAGES_USE_F2FS := true
+
 ### DEXPREOPT
 # Enable dexpreopt for everything to speed boot time
 ifeq ($(HOST_OS),linux)

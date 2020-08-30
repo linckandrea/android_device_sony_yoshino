@@ -27,9 +27,15 @@ PRODUCT_PACKAGES += \
     init.yoshino.pwr \
     init.yoshino.idd.rc \
     init.yoshino.qns.rc \
+    init.qcom.post_boot.sh \
     idd.fstab \
     qns.fstab
 
+# Perf
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/perf/targetresourceconfigs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/targetresourceconfigs.xml \
+    $(LOCAL_PATH)/configs/perf/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml
+    
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay
 

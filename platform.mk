@@ -32,12 +32,12 @@ PRODUCT_PACKAGES += \
 
 # Perf
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/perf/targetresourceconfigs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/targetresourceconfigs.xml \
-    $(LOCAL_PATH)/configs/perf/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml
+    $(PLATFORM_PATH)/config/perf/targetresourceconfigs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/targetresourceconfigs.xml \
+    $(PLATFORM_PATH)/config/perf/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml
 
 # EAS PowerHAL configuration file
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/config/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+    $(PLATFORM_PATH)/config/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
 # EAS PowerHAL
 PRODUCT_PACKAGES += \

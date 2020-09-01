@@ -27,7 +27,6 @@ PRODUCT_PACKAGES += \
     init.yoshino.pwr \
     init.yoshino.idd.rc \
     init.yoshino.qns.rc \
-    init.qcom.post_boot.sh \
     idd.fstab \
     qns.fstab
 

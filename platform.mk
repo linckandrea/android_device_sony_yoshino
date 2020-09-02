@@ -41,7 +41,7 @@ PRODUCT_COPY_FILES += \
 
 # EAS PowerHAL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.2-service.wahoo-libperfmgr
+    android.hardware.power@1.2-service.google
     
 DEVICE_PACKAGE_OVERLAYS += \
     $(PLATFORM_PATH)/overlay

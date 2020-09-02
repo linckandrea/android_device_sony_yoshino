@@ -28,7 +28,7 @@
  */
 
 #define LOG_NIDEBUG 0
-#define LOG_TAG "android.hardware.power@1.2-service.wahoo-libperfmgr"
+#define LOG_TAG "android.hardware.power@1.2-service.google"
 
 #include <errno.h>
 #include <inttypes.h>
@@ -38,6 +38,7 @@
 #include <fcntl.h>
 #include <dlfcn.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include <log/log.h>
 
@@ -49,10 +50,6 @@
 
 #ifndef WLAN_POWER_STAT
 #define WLAN_POWER_STAT "/d/wlan0/power_stats"
-#endif
-
-#ifndef EASEL_STATE_FILE
-#define EASEL_STATE_FILE "/sys/devices/virtual/misc/mnh_sm/state"
 #endif
 
 #define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
@@ -88,6 +85,32 @@ const char *wlan_power_stat_params[] = {
 struct stat_pair wlan_stat_map[] = {
     { WLAN_POWER_DEBUG_STATS, "POWER DEBUG STATS", wlan_power_stat_params, ARRAY_SIZE(wlan_power_stat_params) },
 };
+
+bool sysfs_write(const char *path, const char *s) {
+    bool ret = true;
+    char buf[80];
+    int len;
+    int fd = open(path, O_WRONLY);
+
+    if (fd < 0) {
+        strerror_r(errno, buf, sizeof(buf));
+        ALOGE("Error opening %s: %s\n", path, buf);
+
+        ret = false;
+    }
+
+    len = write(fd, s, strlen(s));
+    if (len < 0) {
+        strerror_r(errno, buf, sizeof(buf));
+        ALOGE("Error writing to %s: %s\n", path, buf);
+
+        ret = false;
+    }
+
+    close(fd);
+
+    return ret;
+}
 
 static int parse_stats(const char **params, size_t params_size,
                        uint64_t *list, FILE *fp) {
@@ -178,44 +201,3 @@ int extract_platform_stats(uint64_t *list) {
 int extract_wlan_stats(uint64_t *list) {
     return extract_stats(list, WLAN_POWER_STAT, wlan_stat_map, ARRAY_SIZE(wlan_stat_map));
 }
-
-int get_easel_state(unsigned long *current_state) {
-    FILE *fp = NULL;
-    static const size_t EASEL_STATE_LINE_SIZE = 16;
-    char buffer[EASEL_STATE_LINE_SIZE];
-    char *parse_end = buffer;
-    unsigned long state;
-
-    if (current_state == NULL) {
-        ALOGD("%s: null current_state pointer from caller", __func__);
-        return -1;
-    }
-
-    fp = fopen(EASEL_STATE_FILE, "re");
-    if (fp == NULL) {
-        ALOGE("%s: failed to open: %s Error = %s", __func__, EASEL_STATE_FILE,
-                strerror(errno));
-        return -errno;
-    }
-
-    if (fgets(buffer, EASEL_STATE_LINE_SIZE, fp) == NULL) {
-        fclose(fp);
-        ALOGE("%s: failed to read: %s", __func__, EASEL_STATE_FILE);
-        return -1;
-    }
-
-    fclose(fp);
-
-    parse_end = buffer;
-    state = strtoul(buffer, &parse_end, 10);
-    if ((parse_end == buffer) || (state > 2)) {
-        ALOGE("%s: unrecognized format: %s '%s'", __func__, EASEL_STATE_FILE,
-                buffer);
-        return -1;
-    }
-
-    *current_state = state;
-
-    return 0;
-}
-

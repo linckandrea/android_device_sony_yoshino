@@ -53,7 +53,6 @@ enum stats_type {
 
 enum subsystem_type {
     SUBSYSTEM_WLAN = 0,
-    SUBSYSTEM_EASEL,
 
     //Don't add any lines after this line
     SUBSYSTEM_COUNT
@@ -91,9 +90,9 @@ struct stat_pair {
     size_t num_parameters;
 };
 
+bool sysfs_write(const char *path, const char *s);
 int extract_platform_stats(uint64_t *list);
 int extract_wlan_stats(uint64_t *list);
-int get_easel_state(unsigned long *current_state);
 
 #ifdef __cplusplus
 }

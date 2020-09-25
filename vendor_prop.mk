@@ -227,3 +227,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.usb.config.extra=none \
     vendor.usb.rndis.func.name=gsi
+
+### KEYPROVD
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.keyprovd.suntory.prov=false

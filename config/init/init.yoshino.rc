@@ -71,6 +71,8 @@ on fs
 
     write /sys/devices/soc/c0a4900.sdhci/mmc_host/mmc0/clkgate_delay 1
 
+	restorecon /dev/block/platform/soc/1da4000.ufshc/by-name/TA
+
     # Kernel module for AES-XTS/AES-CBC used by ext4 FBE
     insmod /vendor/lib/modules/kscl.ko
 

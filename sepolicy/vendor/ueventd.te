@@ -7,3 +7,6 @@ allow ueventd sysfs_qns:dir { relabelto };
 # /persist/wlan
 allow ueventd persist_wlan_file:dir { r_dir_perms };
 allow ueventd persist_wlan_file:file { r_file_perms };
+
+allow ueventd system_firmware_file:dir { r_dir_perms };
+allow ueventd system_firmware_file:file { r_file_perms };

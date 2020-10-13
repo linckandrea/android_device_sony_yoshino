@@ -43,3 +43,6 @@ type sysfs_ufs, fs_type, sysfs_type;
 
 # vendor
 type ffu_firmware_file, file_type, vendor_file_type;
+
+# firmware
+type system_firmware_file, file_type, system_file_type;

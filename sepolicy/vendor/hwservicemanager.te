@@ -10,3 +10,5 @@ allow hwservicemanager modem_switcher:binder { call transfer };
 allow hwservicemanager modem_switcher:dir search;
 allow hwservicemanager modem_switcher:file { open read } ;
 allow hwservicemanager modem_switcher:process getattr;
+
+allow hwservicemanager keyprovd:binder transfer;

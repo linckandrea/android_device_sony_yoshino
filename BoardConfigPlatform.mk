@@ -171,6 +171,7 @@ DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 TARGET_HW_DISK_ENCRYPTION := true
 
 ### SEPOLICY
+SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_SEPOLICY_DIRS += device/sony/yoshino/sepolicy/vendor
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/sony/yoshino/sepolicy/private
 

@@ -1,0 +1,2 @@
+allow hal_qteeconnector_qti keyprovd:binder transfer;
+allow hal_qteeconnector_qti keyprovd:binder transfer;
